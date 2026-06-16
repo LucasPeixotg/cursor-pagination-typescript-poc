@@ -26,13 +26,20 @@ signed cursor.
    npm install
    ```
 
-2. Create a `.env` file with the required variables:
+2. Create a `.env` file (the quickest way is `cp .env.example .env`) and fill in the variables:
 
    ```bash
-   DATABASE_URL=postgres://user:pass@localhost:5432/mydb  # required
-   CURSOR_SECRET=some-long-random-string                  # required (HMAC signing)
-   PORT=3000                                              # optional (default 3000)
-   ALLOWED_ORIGIN=http://localhost:5173                   # optional (CORS)
+   # App
+   PORT=3000                                              # server port (default 3000)
+   TARGET=development                                     # docker build target: development | production
+   DATABASE_URL=postgres://user:pass@db:5432/mydb         # Postgres connection string
+   ALLOWED_ORIGIN=http://localhost:3000                   # CORS allowed origin
+   CURSOR_SECRET=some-long-random-string                  # HMAC secret for signing cursors
+
+   # Postgres container (used by docker-compose)
+   POSTGRES_DB=cursor-poc                                 # database name
+   POSTGRES_USER=cursor-poc-user                          # database user
+   POSTGRES_PASSWORD=some-strong-password                 # database password
    ```
 
 3. Make sure a PostgreSQL instance is running with the `users` and `posts` tables.
