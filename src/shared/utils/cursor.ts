@@ -13,11 +13,6 @@ export interface CursorPayload {
   // Sort columns — required for the keyset query
   createdAt: string;    // full-precision timestamp string (preserves microseconds)
   id:         string;    // unique tiebreaker
-
-  // // Optional security fields
-  // user_id?: string;      // reject cursors from other users
-  // exp?:     number;      // Unix timestamp — cursor expiry
-  // version?: number;      // bump to invalidate all existing cursors
 }
 
 export interface PaginatedResponse<T> {

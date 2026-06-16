@@ -12,9 +12,7 @@ export const fetchPosts = async (req: Request, res: Response, next: NextFunction
 
     // Fetch one extra row to detect whether another page exists.
     const limit = PAGE_SIZE + 1;
-    const rows = cursor
-      ? await postsRepository.fetchNextPage(decodeCursor(cursor), limit)
-      : await postsRepository.fetch(limit);
+    const rows = await postsRepository.fetch(cursor ? decodeCursor(cursor) : null, limit);
 
     const hasMore = rows.length > PAGE_SIZE;
     const data = hasMore ? rows.slice(0, PAGE_SIZE) : rows;
